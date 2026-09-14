@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ehsan Ahmed Sakil - Portfolio</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            margin-left: 2rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .hero {
+            max-width: 1200px;
+            margin: 120px auto 60px;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        section {
+            max-width: 1200px;
+            margin: 0 auto 60px;
+            padding: 2rem;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .skill-tag {
+            background-color: #e0f2fe;
+            color: #0369a1;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--text-color);
+            color: white;
+            margin-top: auto;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            nav a {
+                margin: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div style="font-size: 1.5rem; font-weight: bold; color: var(--primary-color);">Ehsan</div>
+            <div>
+                <a href="#about">About</a>
+                <a href="#experience">Experience</a>
+                <a href="#skills">Skills</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="hero">
+            <h1>Hi, I'm Ehsan Ahmed Sakil</h1>
+            <p>A BBA Management student and multifaceted professional with a passion for Web Development, Digital Marketing, and Digital Content Creation.</p>
+        </div>
+
+        <section id="about">
+            <h2>About Me</h2>
+            <p>I am a final-year Bachelor of Business Administration (BBA) in Management student at Government Bangla College in Dhaka. Alongside my academic pursuits, I have cultivated a diverse skill set spanning web development, graphic design, and hardware troubleshooting. Currently, I am actively contributing to <strong>Asset Sheba</strong> (assetsheba.com).</p>
+            <br>
+            <p>Beyond professional work, I am continually developing my language fluency in both English and German. In my downtime, I'm a massive movie and series enthusiast, enjoy photography and videography, and take care of my guppy fish.</p>
+        </section>
+
+        <section id="experience">
+            <h2>Work Experience & Projects</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Asset Sheba</h3>
+                    <p style="color: #64748b; margin-bottom: 1rem;">Current Focus</p>
+                    <p>Actively engaged in current projects and operations for the Asset Sheba platform (assetsheba.com), applying my business and technical acumen.</p>
+                </div>
+                <div class="card">
+                    <h3>Sales & Customer Operations</h3>
+                    <p style="color: #64748b; margin-bottom: 1rem;">Synergy Business Solution | OTOBI Ltd.</p>
+                    <p>Built a strong foundation in client communication, problem-solving, and operational efficiency through roles as a Call Center Executive and Sales Executive.</p>
+                </div>
+                <div class="card">
+                    <h3>Freelance & Education</h3>
+                    <p style="color: #64748b; margin-bottom: 1rem;">Private Tutor & Content Creator</p>
+                    <p>Experienced in writing video scripts, editing photos, and tutoring. I am also highly comfortable with hardware troubleshooting and system upgrades.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>Core Skills</h2>
+            <div class="skills-container">
+                <span class="skill-tag">Web Development</span>
+                <span class="skill-tag">Digital Marketing</span>
+                <span class="skill-tag">Graphics Design</span>
+                <span class="skill-tag">Photography & Videography</span>
+                <span class="skill-tag">Video Scripting</span>
+                <span class="skill-tag">Hardware Troubleshooting</span>
+                <span class="skill-tag">Microsoft Office</span>
+                <span class="skill-tag">English (Professional)</span>
+                <span class="skill-tag">German (Intermediate)</span>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Get in Touch</h2>
+            <p>I'm always open to discussing new opportunities, creative collaborations, or just chatting about great movies and series.</p>
+            <br>
+            <p><strong>Location:</strong> Dhaka, Bangladesh</p>
+            <p><strong>Email:</strong> your.email@example.com (Update this)</p>
+            <p><strong>LinkedIn:</strong> <a href="#" style="color: var(--primary-color);">linkedin.com/in/yourprofile</a> (Update this)</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Ehsan Ahmed Sakil. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
