@@ -5,231 +5,366 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ehsan Ahmed Sakil - Portfolio</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
         :root {
-            --primary-color: #2563eb;
-            --bg-color: #f8fafc;
-            --text-color: #1e293b;
-            --card-bg: #ffffff;
+            --bg-color: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --card-bg: rgba(30, 41, 59, 0.5);
+            --card-border: rgba(255, 255, 255, 0.1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
             background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
+            color: var(--text-main);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Dynamic Cursor Glow */
+        .cursor-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+            background: radial-gradient(600px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh), rgba(56, 189, 248, 0.1), transparent 40%);
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
         }
 
         header {
-            background-color: var(--card-bg);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             position: fixed;
             width: 100%;
             top: 0;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--card-border);
             z-index: 1000;
         }
 
         nav {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 1rem 2rem;
+            padding: 1.5rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--text-main);
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
         nav a {
             text-decoration: none;
-            color: var(--text-color);
+            color: var(--text-muted);
             margin-left: 2rem;
-            font-weight: 500;
-            transition: color 0.3s;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
         }
 
         nav a:hover {
-            color: var(--primary-color);
-        }
-
-        .hero {
-            max-width: 1200px;
-            margin: 120px auto 60px;
-            padding: 0 2rem;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: #64748b;
-            max-width: 600px;
-            margin: 0 auto;
+            color: var(--accent);
         }
 
         section {
-            max-width: 1200px;
-            margin: 0 auto 60px;
-            padding: 2rem;
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
         }
 
-        h2 {
-            font-size: 2rem;
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: 100px;
+        }
+
+        .hero p.greeting {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.1;
             margin-bottom: 1.5rem;
-            color: var(--primary-color);
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .hero h1 span {
+            color: var(--text-muted);
+        }
+
+        .hero p.desc {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: rgba(56, 189, 248, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: #ffffff;
+        }
+
+        .section-title::after {
+            content: "";
+            flex-grow: 1;
+            height: 1px;
+            background: var(--card-border);
+            margin-left: 1.5rem;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
         }
 
         .card {
-            padding: 1.5rem;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            transition: transform 0.3s;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 2.5rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(56, 189, 248, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: 0.6s;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
-        .skills-container {
+        .card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .card span.company {
+            display: block;
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .skills-wrapper {
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
         }
 
-        .skill-tag {
-            background-color: #e0f2fe;
-            color: #0369a1;
-            padding: 0.5rem 1rem;
-            border-radius: 9999px;
+        .skill-pill {
+            padding: 0.75rem 1.5rem;
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid var(--card-border);
+            border-radius: 30px;
             font-size: 0.9rem;
-            font-weight: 500;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .skill-pill:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: scale(1.05);
         }
 
         footer {
             text-align: center;
             padding: 2rem;
-            background-color: var(--text-color);
-            color: white;
-            margin-top: auto;
+            color: var(--text-muted);
+            border-top: 1px solid var(--card-border);
+            font-size: 0.9rem;
         }
 
         @media (max-width: 768px) {
-            nav {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            nav a {
-                margin: 0 1rem;
-            }
+            .hero h1 { font-size: 3rem; }
+            nav { flex-direction: column; gap: 1rem; }
+            nav a { margin: 0 1rem; }
+            .section-title::after { display: none; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <nav>
-            <div style="font-size: 1.5rem; font-weight: bold; color: var(--primary-color);">Ehsan</div>
-            <div>
-                <a href="#about">About</a>
-                <a href="#experience">Experience</a>
-                <a href="#skills">Skills</a>
-                <a href="#contact">Contact</a>
-            </div>
-        </nav>
-    </header>
+    <!-- This div tracks the mouse to create the glow effect -->
+    <div class="cursor-glow"></div>
 
-    <main>
-        <div class="hero">
-            <h1>Hi, I'm Ehsan Ahmed Sakil</h1>
-            <p>A BBA Management student and multifaceted professional with a passion for Web Development, Digital Marketing, and Digital Content Creation.</p>
-        </div>
-
-        <section id="about">
-            <h2>About Me</h2>
-            <p>I am a final-year Bachelor of Business Administration (BBA) in Management student at Government Bangla College in Dhaka. Alongside my academic pursuits, I have cultivated a diverse skill set spanning web development, graphic design, and hardware troubleshooting. Currently, I am actively contributing to <strong>Asset Sheba</strong> (assetsheba.com).</p>
-            <br>
-            <p>Beyond professional work, I am continually developing my language fluency in both English and German. In my downtime, I'm a massive movie and series enthusiast, enjoy photography and videography, and take care of my guppy fish.</p>
-        </section>
-
-        <section id="experience">
-            <h2>Work Experience & Projects</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>Asset Sheba</h3>
-                    <p style="color: #64748b; margin-bottom: 1rem;">Current Focus</p>
-                    <p>Actively engaged in current projects and operations for the Asset Sheba platform (assetsheba.com), applying my business and technical acumen.</p>
+    <div class="content-wrapper">
+        <header>
+            <nav>
+                <div class="logo">Ehsan<span>.</span></div>
+                <div>
+                    <a href="#about">About</a>
+                    <a href="#experience">Experience</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#contact">Contact</a>
                 </div>
-                <div class="card">
-                    <h3>Sales & Customer Operations</h3>
-                    <p style="color: #64748b; margin-bottom: 1rem;">Synergy Business Solution | OTOBI Ltd.</p>
-                    <p>Built a strong foundation in client communication, problem-solving, and operational efficiency through roles as a Call Center Executive and Sales Executive.</p>
+            </nav>
+        </header>
+
+        <main>
+            <section class="hero">
+                <p class="greeting">Hi, my name is</p>
+                <h1>Ehsan Ahmed Sakil.<br><span>I build and manage digital assets.</span></h1>
+                <p class="desc">I'm a BBA Management student based in Mirpur, Dhaka, specializing in web development, digital marketing, and multimedia content creation. I am currently focused on driving growth for Asset Sheba.</p>
+                <div>
+                    <a href="#contact" class="btn">Get In Touch</a>
                 </div>
-                <div class="card">
-                    <h3>Freelance & Education</h3>
-                    <p style="color: #64748b; margin-bottom: 1rem;">Private Tutor & Content Creator</p>
-                    <p>Experienced in writing video scripts, editing photos, and tutoring. I am also highly comfortable with hardware troubleshooting and system upgrades.</p>
+            </section>
+
+            <section id="about">
+                <h2 class="section-title">About Me</h2>
+                <div class="card" style="padding: 3rem;">
+                    <p style="margin-bottom: 1.5rem; color: var(--text-main); font-size: 1.1rem;">
+                        Hello! I am a final-year student at Government Bangla College. My professional journey is a mix of business administration and hands-on technical execution. Currently, my primary focus is developing and managing <strong>Asset Sheba</strong> (assetsheba.com).
+                    </p>
+                    <p style="color: var(--text-muted); font-size: 1.1rem;">
+                        Beyond the digital landscape, I am continuously working on my language proficiency in both English and German. I am an avid consumer of movies and series, which helps fuel my passion for photography, videography, and scriptwriting. When I'm not in front of a screen, you might find me taking care of my guppy fish or troubleshooting hardware setups.
+                    </p>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="skills">
-            <h2>Core Skills</h2>
-            <div class="skills-container">
-                <span class="skill-tag">Web Development</span>
-                <span class="skill-tag">Digital Marketing</span>
-                <span class="skill-tag">Graphics Design</span>
-                <span class="skill-tag">Photography & Videography</span>
-                <span class="skill-tag">Video Scripting</span>
-                <span class="skill-tag">Hardware Troubleshooting</span>
-                <span class="skill-tag">Microsoft Office</span>
-                <span class="skill-tag">English (Professional)</span>
-                <span class="skill-tag">German (Intermediate)</span>
-            </div>
-        </section>
+            <section id="experience">
+                <h2 class="section-title">Where I've Worked</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>Asset Sheba</h3>
+                        <span class="company">Current Focus | assetsheba.com</span>
+                        <p>Leading digital initiatives and managing operational assets. Applying cross-functional skills in web development and digital marketing to scale the platform.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Sales & Client Ops</h3>
+                        <span class="company">Synergy Business Solution & OTOBI Ltd.</span>
+                        <p>Delivered exceptional client communication and drove sales targets as a Call Center Executive and Sales Executive, building a strong foundation in business operations.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Technical & Creative Freelance</h3>
+                        <span class="company">Independent Work</span>
+                        <p>Authored video scripts, edited photography, and provided private tutoring. Conducted extensive PC hardware troubleshooting, assembly, and system upgrades.</p>
+                    </div>
+                </div>
+            </section>
 
-        <section id="contact">
-            <h2>Get in Touch</h2>
-            <p>I'm always open to discussing new opportunities, creative collaborations, or just chatting about great movies and series.</p>
-            <br>
-            <p><strong>Location:</strong> Dhaka, Bangladesh</p>
-            <p><strong>Email:</strong> your.email@example.com (Update this)</p>
-            <p><strong>LinkedIn:</strong> <a href="#" style="color: var(--primary-color);">linkedin.com/in/yourprofile</a> (Update this)</p>
-        </section>
-    </main>
+            <section id="skills">
+                <h2 class="section-title">Technical Arsenal</h2>
+                <div class="skills-wrapper">
+                    <div class="skill-pill">Web Development</div>
+                    <div class="skill-pill">Digital Marketing</div>
+                    <div class="skill-pill">Graphics Design</div>
+                    <div class="skill-pill">Video Scripting</div>
+                    <div class="skill-pill">Photography & Videography</div>
+                    <div class="skill-pill">Hardware Troubleshooting</div>
+                    <div class="skill-pill">Microsoft Office</div>
+                    <div class="skill-pill">English (Professional)</div>
+                    <div class="skill-pill">German (Intermediate)</div>
+                </div>
+            </section>
 
-    <footer>
-        <p>&copy; 2026 Ehsan Ahmed Sakil. All rights reserved.</p>
-    </footer>
+            <section id="contact">
+                <h2 class="section-title">What's Next?</h2>
+                <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+                    <h3 style="font-size: 2.5rem; margin-bottom: 1.5rem; color: #ffffff;">Get In Touch</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 1.1rem;">
+                        Whether you have a question about Asset Sheba, want to collaborate on a creative project, or just want to discuss great movies, my inbox is always open.
+                    </p>
+                    <a href="mailto:your.email@example.com" class="btn">Say Hello</a>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Ehsan Ahmed Sakil. Designed & Built with intent.</p>
+        </footer>
+    </div>
 
     <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
+        // Dynamic Glowing Background that follows the cursor
+        const root = document.documentElement;
+        
+        document.addEventListener('mousemove', e => {
+            let x = e.clientX;
+            let y = e.clientY;
+            root.style.setProperty('--mouse-x', x + "px");
+            root.style.setProperty('--mouse-y', y + "px");
         });
     </script>
 </body>
